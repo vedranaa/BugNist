@@ -4,7 +4,6 @@
 '''
 
 import vtk_helpers as vh
-import processing_helpers as ph  
 import tifffile
 import argparse
 
@@ -17,7 +16,7 @@ vol = tifffile.imread(args.filename)
 vol_importer = vh.prepare_vol_data(vol)
 
 if args.surf:
-    t = ph.threshold_otsu(vol)
+    t = vh.threshold_otsu(vol)
     actor =  vh.prepare_surface_actor(vol_importer, isovalue=t)
 else: 
     actor = vh.prepare_volume_actor(vol_importer)

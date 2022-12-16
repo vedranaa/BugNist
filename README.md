@@ -34,7 +34,7 @@ pip install vtk
 
 Run test script with virtualGL
 ```
-vglrun python red_cube_vtk_test.py
+vglrun python red_cube_test.py
 ``` 
 If a window opens with a rendering of a red cube, you're good to go! The window might open *behind* other open windows, so make sure to look for it before concluding that it did not work.
 
