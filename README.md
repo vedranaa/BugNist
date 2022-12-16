@@ -1,6 +1,9 @@
-For vtk-based rendeing from python  at the g-bar server:
-- Start a VirtualGL node by opening a terminal `Applications -> DTU -> xterm(VirtualGL-application-node)`
-- Make a python environment, I slightly modified  Patrick's `init.sh`
+# Setup
+*For vtk-based rendeing from python  at the g-bar server*
+
+Start a VirtualGL node by opening a terminal `Applications -> DTU -> xterm(VirtualGL-application-node)`
+
+Make a python environment, I slightly modified  Patrick's `init.sh`
 ```
 #!/bin/bash
 # Based on simple init script for Python on DTU HPC
@@ -23,21 +26,33 @@ then
 fi
 source "${VENV_DIR}/${VENV_NAME}/bin/activate"
 ```
-- Install vtk 
+
+Install vtk 
 ```
 pip install vtk
 ```
 
-- Run test script with virtualGL
+Run test script with virtualGL
 ```
 vglrun python red_cube_vtk_test.py
 ``` 
-- If a window opens with a rendering of a red cube, you're good to go! The window might open *behind* other open windows, so make sure to look for it before concluding that it did not work.
+If a window opens with a rendering of a red cube, you're good to go! The window might open *behind* other open windows, so make sure to look for it before concluding that it did not work.
 
-- Additional installs for handling volumetric files  
+Additional installs for handling volumetric files  
 
 ```
 pip install tifffile
 ```
 
+# Use
 
+
+Try using `showbug`, by typing one of the following
+```
+python showbug.py filename
+python showbug.ph filename -surf
+```
+
+The code from the script `render_in_notebook` is written to be used interactively, for example in Jupyter notebook.
+
+The script `save_screenshots.py` needs to know the source folder where to find tiff files and destination folder to store screensots.

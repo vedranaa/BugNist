@@ -5,6 +5,8 @@ import vtk_helpers as vh
 import tifffile
 import matplotlib.pyplot as plt
 import glob
+import os
+
 
     
 #%%
