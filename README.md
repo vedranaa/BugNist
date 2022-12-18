@@ -58,7 +58,7 @@ The code from the script `render_in_notebook` is written to be used interactivel
 
 To start jupyter run `vglrun jupyter notebook`.
 
-The python script `save_screenshots.py` has hard-coded variables for the source folder where to find tiff files and for destination folder to store screensots. So it needst to modified.
+The python script `save_view_screenshots.py` has hard-coded variables for the source folder where to find tiff files and for destination folder to store screensots. So it needst to modified.
 
 
 
