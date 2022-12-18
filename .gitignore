@@ -1,3 +1,5 @@
 /.DS_Store
 /sample_data
 /screenshots
+colormap_ygb.json
+__pycache__/vtk_helpers.cpython-310.pyc
