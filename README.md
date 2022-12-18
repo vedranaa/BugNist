@@ -46,8 +46,9 @@ pip install tifffile
 
 # Use
 
+Start a VirtualGL node, and run `. init.sh`.
 
-Try using `showbug`, by typing one of the following
+Try executing python file `showbug.py`, by typing one of the following
 ```
 python showbug.py filename
 python showbug.ph filename -surf
@@ -55,4 +56,11 @@ python showbug.ph filename -surf
 
 The code from the script `render_in_notebook` is written to be used interactively, for example in Jupyter notebook.
 
-The script `save_screenshots.py` needs to know the source folder where to find tiff files and destination folder to store screensots.
+To start jupyter run `vglrun jupyter notebook`.
+
+The python script `save_screenshots.py` has hard-coded variables for the source folder where to find tiff files and for destination folder to store screensots. So it needst to modified.
+
+
+
+
+

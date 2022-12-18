@@ -2,6 +2,7 @@ import vtk
 import PIL.Image
 import io
 import numpy as np
+import json
 
 
 def save_screenshot(filename, renderWindow):
@@ -247,3 +248,16 @@ def threshold_otsu(image=None, nbins=256):
     threshold = bin_centers[idx]
 
     return threshold
+
+    
+def load_color_transfer(filename, reverse=False):
+    '''Load color transfer from the colormap file experted from Paraview.'''
+    
+    with open(filename) as file:
+        data = json.load(file)
+    rgb = data[0]['RGBPoints']
+    if reverse:
+        ct = {255-int(rgb[i]*255) : rgb[i+1:i+4] for i in range(0, len(rgb), 4)}
+    else:
+        ct = {int(rgb[i]*255) : rgb[i+1:i+4] for i in range(0, len(rgb), 4)}
+    return ct
