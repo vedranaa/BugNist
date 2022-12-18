@@ -43,17 +43,19 @@ def prepare_volume_actor(dataImporter, **kwargs):
     volumeProperty = vtk.vtkVolumeProperty()
     
     # Opacity  transfer function.
-    scalarOpacityFunc = vtk.vtkPiecewiseFunction()
-    for point in scalarOpacity:
-        scalarOpacityFunc.AddPoint(point, scalarOpacity[point])
-    volumeProperty.SetScalarOpacity(scalarOpacityFunc)
+    if scalarOpacity is not None:
+        scalarOpacityFunc = vtk.vtkPiecewiseFunction()
+        for point in scalarOpacity:
+            scalarOpacityFunc.AddPoint(point, scalarOpacity[point])
+        volumeProperty.SetScalarOpacity(scalarOpacityFunc)
             
     # Color transfer function.
-    colorTransferFunc = vtk.vtkColorTransferFunction()
-    for point in colorTransfer:
-        colorTransferFunc.AddRGBPoint(point, colorTransfer[point][0], 
+    if colorTransfer is not None:
+        colorTransferFunc = vtk.vtkColorTransferFunction()
+        for point in colorTransfer:
+            colorTransferFunc.AddRGBPoint(point, colorTransfer[point][0], 
                 colorTransfer[point][1], colorTransfer[point][2])
-    volumeProperty.SetColor(colorTransferFunc)
+        volumeProperty.SetColor(colorTransferFunc)
 
     # Gradient opacity function (decrease opacity in constant-intensity regions).
     if gradientOpacity is not None:
