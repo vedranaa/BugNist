@@ -1,3 +1,5 @@
+This code is used for BugNist and forams.
+
 # Setup
 *For vtk-based rendeing from python  at the g-bar server*
 
