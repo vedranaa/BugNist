@@ -5,7 +5,7 @@ This code is used for BugNist and forams. See it in use in ``BugNist/analysis/re
 
 Start a VirtualGL node by opening a terminal `Applications -> DTU -> xterm(VirtualGL-application-node)`
 
-Make a python environment, I slightly modified  Patrick's `init.sh`
+Make a python environment, I slightly modified  Patrick's `init.sh` (change evt. to 3.11.9)
 ```
 #!/bin/bash
 # Based on simple init script for Python on DTU HPC
