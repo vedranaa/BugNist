@@ -160,7 +160,7 @@ def prepare_empty_window(**kwargs):
     return renderWindow, renderer, camera
     
 
-render_interactively(renderWindow):
+def render_interactively(renderWindow):
  
     renderInteractor = vtk.vtkRenderWindowInteractor()
     renderInteractor.SetInteractorStyle(vtk.vtkInteractorStyleTrackballCamera())
