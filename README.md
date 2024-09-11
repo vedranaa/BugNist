@@ -1,7 +1,7 @@
 This code is used for BugNist and forams. See it in use in ``BugNist/analysis/rendering_code`` and ``forams/analysis/rendering_code``.
 
 # Setup
-*For vtk-based rendeing from python  at the g-bar server*
+*For vtk-based rendering from python  at the g-bar server*
 
 Start a VirtualGL node by opening a terminal `Applications -> DTU -> xterm(VirtualGL-application-node)`
 
