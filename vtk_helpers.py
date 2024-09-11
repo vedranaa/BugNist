@@ -28,6 +28,85 @@ def prepare_vol_data(numpyVolume):
     return importer
 
 
+
+def mesh_volume(numpyVolume, isovalue=100, connected=False, smooth=False, decimate=True, fill=True):
+    ''' Mesh a volume using marching cubes. 
+        numpyVolume: 3D numpy array.
+        isovalue: Contour value for the mesh.
+        connected: Keep only the largest connected region. 
+        smooth: Number of smoothing iterations or True (defaults to 15).
+        decimate: Reduction factor or True (defaults to 0.9 which keeps 10% of vertices).
+        fill: Hole size in the mesh or True (defaults to 1000).
+    '''
+    vol_importer = prepare_vol_data(numpyVolume)
+
+    surfaceExtractor = vtk.vtkMarchingCubes()
+    surfaceExtractor.SetInputConnection(vol_importer.GetOutputPort())
+    surfaceExtractor.SetValue(0, isovalue)  # contour number, contour value
+    surface = surfaceExtractor
+
+    if connected:
+        # Keeps only the largest connected region.
+        connected = vtk.vtkPolyDataConnectivityFilter()
+        connected.SetInputConnection(surface.GetOutputPort())
+        connected.SetExtractionModeToLargestRegion()
+        surface = connected
+
+    if smooth:
+        if smooth is True: 
+            smoothing_iterations = 15  # default if True
+        else: 
+            smoothing_iterations = smooth  # user defined
+    
+        pass_band = 0.001
+        feature_angle = 120.0
+        smoother = vtk.vtkWindowedSincPolyDataFilter()
+        smoother.SetInputConnection(surface.GetOutputPort())
+        smoother.SetNumberOfIterations(smoothing_iterations)
+        smoother.BoundarySmoothingOff()
+        smoother.FeatureEdgeSmoothingOff()
+        smoother.SetFeatureAngle(feature_angle)
+        smoother.SetPassBand(pass_band)
+        smoother.NonManifoldSmoothingOn()
+        smoother.NormalizeCoordinatesOn()
+        smoother.Update()
+        surface = smoother
+
+    if decimate:
+        # Hard coding the parameters for now.
+        if decimate is True:
+            reduction = 0.9
+        else:
+            reduction = decimate
+    
+        decimate = vtk.vtkDecimatePro()
+        decimate.SetInputConnection(surface.GetOutputPort())
+        decimate.SetTargetReduction(reduction)
+        decimate.PreserveTopologyOn()
+        decimate.Update()
+        surface = decimate   
+
+    if fill:
+        # Fill holes in the mesh.
+        hole_size = 1000    
+        fill = vtk.vtkFillHolesFilter()
+        fill.SetInputConnection(surface.GetOutputPort())
+        fill.SetHoleSize(hole_size)
+        fill.Update()
+        surface = fill
+
+    return surface
+
+def save_mesh(inputsurface, filename):
+    ''' Save the mesh to a file. '''
+    if filename[-3:] == 'stl':
+        writer = vtk.vtkSTLWriter()
+    else:
+        writer = vtk.vtkPLYWriter()
+    writer.SetFileName(filename)
+    writer.SetInputConnection(inputsurface.GetOutputPort())
+    writer.Write()
+
 def prepare_volume_actor(dataImporter, **kwargs):
     ''' Prepare for volume rendering of volumetric data. Accepts keyword 
     arguments: scalarOpacity, gradientOpacity, colorTransfer.'''
@@ -263,3 +342,6 @@ def load_color_transfer(filename, reverse=False):
     else:
         ct = {int(rgb[i]*255) : rgb[i+1:i+4] for i in range(0, len(rgb), 4)}
     return ct
+
+
+    
