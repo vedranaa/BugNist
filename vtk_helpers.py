@@ -217,6 +217,28 @@ def prepare_renderer(actor, dims=None, **kwargs):
     return renderWindow
 
 
+def prepare_empty_window(**kwargs):
+    ''' Prepare empty renderer and render window.''' 
+    
+	# parsing input
+    windowName = kwargs.get('windowName', '')
+    windowSize = kwargs.get('windowSize', (500, 500))
+    backgroundColor = kwargs.get('backgroundColor', (1.0, 1.0, 1.0))
+    
+    # actual work
+    renderer = vtk.vtkRenderer()
+    renderer.SetBackground(*backgroundColor)
+    
+    renderWindow = vtk.vtkRenderWindow()
+    renderWindow.AddRenderer(renderer)
+    renderWindow.SetWindowName(windowName)
+    renderWindow.SetSize(*windowSize)
+        
+    camera = renderer.GetActiveCamera()
+    
+    return renderWindow, renderer, camera
+    
+
 def render_interactively(renderWindow):
  
     renderInteractor = vtk.vtkRenderWindowInteractor()
@@ -342,6 +364,7 @@ def load_color_transfer(filename, reverse=False):
     else:
         ct = {int(rgb[i]*255) : rgb[i+1:i+4] for i in range(0, len(rgb), 4)}
     return ct
+
 
 
     
