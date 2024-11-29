@@ -58,7 +58,7 @@ python showbug.ph filename -surf
 
 The code from the script `render_in_notebook` is written to be used interactively, for example in Jupyter notebook.
 
-To start jupyter run `vglrun jupyter notebook`.
+To start jupyter `pip install jupyter` and run `vglrun jupyter notebook`.
 
 The python script `save_view_screenshots.py` has hard-coded variables for the source folder where to find tiff files and for destination folder to store screensots. So it needst to modified.
 
