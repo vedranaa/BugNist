@@ -5,14 +5,14 @@ This code is used for BugNist and forams. See it in use in ``BugNist/analysis/re
 
 Start a VirtualGL node by opening a terminal `Applications -> DTU -> xterm(VirtualGL-application-node)`
 
-Make a python environment, I slightly modified  Patrick's `init.sh` (change evt. to 3.11.9)
+Make a python environment, I slightly modified  Patrick's `init.sh` (originally it said python 3.9.14)
 ```
 #!/bin/bash
 # Based on simple init script for Python on DTU HPC
 # by Patrick M. Jensen, patmjen@dtu.dk, 2022
 
 # Configuration
-PYTHON_VERSION=3.9.14  # Python version
+PYTHON_VERSION=3.11.9  # Python version
 VENV_DIR=.  # Where to store your virtualenv
 VENV_NAME=withVtk  # Name of your virtualenv
 
